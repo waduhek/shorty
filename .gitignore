@@ -1,0 +1,9 @@
+# Build artifacts
+target
+
+# Environment configuration
+.env
+test.env
+
+# Miscellaneous files and folders
+.DS_Store
