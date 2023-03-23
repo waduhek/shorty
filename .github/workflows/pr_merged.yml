@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build project
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: cargo build
+
+      - name: Set time
+        run: echo "build_time=${date +%f}" >> $GITHUB_ENV
+
+      - name: Upload build files
+        uses: actions/upload-artifacts@v3
+        with:
+          name: build-${{ env.build_time }}
+          path: target
