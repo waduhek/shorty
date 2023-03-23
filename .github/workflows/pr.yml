@@ -1,0 +1,41 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+    paths:
+      - "**.rs"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "clippy.toml"
+      - "rustfmt.toml"
+
+jobs:
+  lint_and_format:
+    name: Lint and format check
+    runs_on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check for formatting issues
+        run: cargo fmt --check
+
+      - name: Check for linting issues
+        run: cargo clippy -- -D warnings
+
+  check_and_test:
+    name: Check for compile errors and run tests
+    runs_on: ubuntu-latest
+
+    steps:
+      - actions/checkout@v3
+
+      - name: Check for compile errors
+        run: cargo check
+
+      - name: Run doc tests
+        run: cargo test --doc
+
+      - name: Run unit tests
+        run: cargo test --lib --bins
