@@ -18,6 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Cache build files
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-cargo-and-target-cache-${{ hashFiles("**/Cargo.lock") }}
+          path: |
+            ~/.cargo
+            ./target
+
       - name: Check for formatting issues
         run: cargo fmt --check
 
@@ -30,6 +38,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Cache build files
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-cargo-and-target-cache-${{ hashFiles("**/Cargo.lock") }}
+          path: |
+            ~/.cargo
+            ./target
 
       - name: Check for compile errors
         run: cargo check
