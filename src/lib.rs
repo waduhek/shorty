@@ -41,10 +41,7 @@
 mod db;
 mod id;
 
-use crate::{
-    db::urls::{self, increment_url_view_count, save_url, Url},
-    id::generate_id,
-};
+use crate::{db::urls::Url, id::generate_id};
 
 /// Sets up the database required for the library.
 ///
@@ -99,10 +96,10 @@ pub async fn create_url(full_url: &str) -> Result<String, &'static str> {
     const SAVE_RETRY_COUNT: u8 = 2;
 
     let id = generate_id(full_url);
-    let mut url_obj = Url::new(id, full_url, 0);
+    let mut url_obj = Url::new(id, full_url, 0).await;
 
     for _ in 1..SAVE_RETRY_COUNT {
-        match save_url(&url_obj).await {
+        match url_obj.save().await {
             Ok(_) => return Ok(url_obj.get_short_id().to_string()),
             Err(err) => {
                 // An error should only really occur when the generated ID is
@@ -144,7 +141,7 @@ pub async fn create_url(full_url: &str) -> Result<String, &'static str> {
 /// # }
 /// ```
 pub async fn get_url(short_id: &str) -> Result<Option<String>, &'static str> {
-    let url_object = match urls::get_url(short_id).await {
+    let url_object = match Url::fetch_url(short_id).await {
         Ok(obj) => obj,
         Err(e) => {
             println!("error while fetching url: {e}");
@@ -156,9 +153,10 @@ pub async fn get_url(short_id: &str) -> Result<Option<String>, &'static str> {
         return Ok(None);
     }
 
-    let url_object = url_object.unwrap();
+    let mut url_object = url_object.unwrap();
+    url_object.increment_view_count();
 
-    if let Err(e) = increment_url_view_count(url_object.get_short_id()).await {
+    if let Err(e) = url_object.save().await {
         println!("error while updating view count: {e}");
         return Err("could not update URL view count");
     }

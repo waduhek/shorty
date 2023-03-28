@@ -19,7 +19,7 @@ async fn test_get_url() {
     assert_eq!(full_url, URL);
 
     // Cleanup
-    common::delete_by_short_id(&short_id).await;
+    common::delete_by_short_id(short_id).await;
 }
 
 #[tokio::test]

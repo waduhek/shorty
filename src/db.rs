@@ -2,7 +2,10 @@ pub mod urls;
 
 use std::env;
 
-use mongodb::{bson::doc, options::ClientOptions, Client, Database};
+use mongodb::{
+    bson::doc, error::Result as MongoResult, options::ClientOptions, Client,
+    Database,
+};
 
 /// Gets a new connection to the DB used by the application.
 ///
@@ -11,7 +14,7 @@ use mongodb::{bson::doc, options::ClientOptions, Client, Database};
 /// ```rust,ignore
 /// let db = get_shorty_db_connection().await?;
 /// ```
-async fn get_shorty_db_connection() -> mongodb::error::Result<Database> {
+async fn get_shorty_db_connection() -> MongoResult<Database> {
     let client_options = ClientOptions::parse(
         env::var("SHORTY_MONGODB_URI")
             .expect("could not find connection string"),

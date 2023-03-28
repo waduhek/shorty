@@ -14,5 +14,5 @@ async fn test_create_new_url() {
         create_url_result.err().unwrap()
     );
 
-    common::delete_by_short_id(&create_url_result.unwrap()).await;
+    common::delete_by_short_id(create_url_result.unwrap()).await;
 }
