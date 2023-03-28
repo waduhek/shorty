@@ -13,10 +13,18 @@ on:
 jobs:
   lint_and_format:
     name: Lint and format check
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Cache build files
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-cargo-and-target-cache-${{ hashFiles('**/Cargo.lock') }}
+          path: |
+            ~/.cargo
+            ./target
 
       - name: Check for formatting issues
         run: cargo fmt --check
@@ -26,10 +34,18 @@ jobs:
 
   check_and_test:
     name: Check for compile errors and run tests
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Cache build files
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-cargo-and-target-cache-${{ hashFiles('**/Cargo.lock') }}
+          path: |
+            ~/.cargo
+            ./target
 
       - name: Check for compile errors
         run: cargo check

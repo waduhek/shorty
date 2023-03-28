@@ -11,6 +11,7 @@ sha2 = "0.10.6"
 rand = "0.8.5"
 hex = "0.4.3"
 dotenv = "0.15.0"
+chrono = "0.4.24"
 
 [dependencies.tokio]
 version = "1.25.0"
@@ -19,3 +20,7 @@ features = ["full"]
 [dependencies.serde]
 version = "1.0.152"
 features = ["derive"]
+
+[dependencies.bson]
+version = "2.6.1"
+features = ["chrono-0_4"]
