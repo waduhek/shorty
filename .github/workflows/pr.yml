@@ -13,7 +13,7 @@ on:
 jobs:
   lint_and_format:
     name: Lint and format check
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
 
   check_and_test:
     name: Check for compile errors and run tests
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
