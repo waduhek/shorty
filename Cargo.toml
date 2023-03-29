@@ -18,7 +18,7 @@ version = "1.27.0"
 features = ["full"]
 
 [dependencies.serde]
-version = "1.0.152"
+version = "1.0.159"
 features = ["derive"]
 
 [dependencies.bson]
