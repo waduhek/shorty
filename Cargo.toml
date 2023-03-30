@@ -10,8 +10,9 @@ mongodb = "2.4.0"
 sha2 = "0.10.6"
 rand = "0.8.5"
 hex = "0.4.3"
-dotenv = "0.15.0"
 chrono = "0.4.24"
+regex = "1.7.3"
+lazy_static = "1.4.0"
 
 [dependencies.tokio]
 version = "1.27.0"
@@ -24,3 +25,10 @@ features = ["derive"]
 [dependencies.bson]
 version = "2.6.1"
 features = ["chrono-0_4"]
+
+[dev-dependencies]
+dotenv = "0.15.0"
+
+[[bin]]
+name = "shorty"
+path = "src/main.rs"
