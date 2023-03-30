@@ -86,13 +86,10 @@ async fn handle_lengthen_short_id(short_id: String) {
 
 #[tokio::main]
 async fn main() {
-    match shorty::setup_db().await {
-        Err(e) => {
-            eprintln!("{e}");
-            process::exit(1);
-        }
-        Ok(_) => (),
-    };
+    if let Err(e) = shorty::setup_db().await {
+        eprintln!("{e}");
+        process::exit(1);
+    }
 
     let args = match ShortyArgs::build(env::args()) {
         Ok(arg) => arg,

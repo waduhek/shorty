@@ -1,7 +1,7 @@
 use regex::Regex;
 
-const SHORTEN_COMMAND: &'static str = "shorten";
-const LENGTHEN_COMMAND: &'static str = "lengthen";
+const SHORTEN_COMMAND: &str = "shorten";
+const LENGTHEN_COMMAND: &str = "lengthen";
 
 #[derive(Debug, PartialEq, Eq)]
 pub(super) enum ShortyCommand {
@@ -68,7 +68,7 @@ impl ShortyArgs {
 mod test {
     use super::*;
 
-    const SHORTY_EXEC: &'static str = "shorty";
+    const SHORTY_EXEC: &str = "shorty";
 
     #[test]
     fn should_build_shorten_command() {
