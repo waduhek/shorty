@@ -64,3 +64,47 @@ async fn main() -> Result<(), &'static str> {
     Ok(())
 }
 ```
+
+# CLI Usage
+
+## Cloning and Building
+
+To use the CLI, first clone the repository using:
+
+```
+git clone https://github.com/waduhek/shorty.git
+```
+
+Then build the binary using:
+
+```
+cargo build --bin shorty
+```
+
+## Running
+
+The binary provides 2 commands viz. `shorten` and `lengthen`. `shorten` command
+requires a valid URL to shorten. Currently the only protocols accepted are HTTP
+and HTTPS. The `lengthen` command takes the short ID and returns the full URL
+corresponding to the short ID.
+
+### Shorten a URL using the CLI
+
+To shorten a URL run:
+
+```
+cargo run -- shorten https://example.com
+```
+
+The short ID will be printed as the output.
+
+### Lengthen a URL using the CLI
+
+To lengthen a URL run:
+
+```
+cargo run -- lengthen abcdAd321
+```
+
+The URL will be printed as the output. If the provided short ID was not found,
+`not found` will be printed as the output with a return code 1.
