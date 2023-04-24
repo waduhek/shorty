@@ -6,7 +6,7 @@ authors = ["Ryan Noronha"]
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-mongodb = "2.4.0"
+mongodb = "2.5.0"
 sha2 = "0.10.6"
 rand = "0.8.5"
 hex = "0.4.3"
