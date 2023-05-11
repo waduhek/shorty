@@ -45,9 +45,6 @@
 //! output. If the provided short ID was not found, "not found" will be printed
 //! as the output to STDERR.
 
-#[macro_use]
-extern crate lazy_static;
-
 mod cli_utils;
 
 use std::{env, process};
