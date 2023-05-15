@@ -13,12 +13,3 @@ jobs:
 
       - name: Build
         run: cargo build
-
-      - name: Set time
-        run: echo "build_time=$(date +%F)" >> $GITHUB_ENV
-
-      - name: Upload build files
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-${{ env.build_time }}
-          path: target
