@@ -10,7 +10,7 @@ mongodb = "2.6.1"
 sha2 = "0.10.7"
 rand = "0.8.5"
 hex = "0.4.3"
-chrono = "0.4.26"
+chrono = "0.4.30"
 regex = "1.9.5"
 lazy_static = "1.4.0"
 
