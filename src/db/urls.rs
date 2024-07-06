@@ -105,18 +105,14 @@ impl Url {
             .expect("trying to save from changeset when changeset is None");
 
         self.collection
-            .update_one(
-                doc! { "short_id": &self.model.short_id },
-                changeset,
-                None,
-            )
+            .update_one(doc! { "short_id": &self.model.short_id }, changeset)
             .await?;
         Ok(())
     }
 
     async fn _save_new_url(&self) -> MongoResult<()> {
         if !self.is_fetched_from_db {
-            self.collection.insert_one(&self.model, None).await?;
+            self.collection.insert_one(&self.model).await?;
         }
         Ok(())
     }
@@ -149,7 +145,7 @@ impl Url {
         let url_collection = Self::get_collection().await?;
 
         let fetched_url = url_collection
-            .find_one(doc! { "short_id": short_id }, None)
+            .find_one(doc! { "short_id": short_id })
             .await?;
 
         match fetched_url {
@@ -206,7 +202,7 @@ impl Url {
             .options(IndexOptions::builder().unique(true).build())
             .build();
 
-        url_collection.create_index(short_id_index, None).await?;
+        url_collection.create_index(short_id_index).await?;
         Ok(())
     }
 }
