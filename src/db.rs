@@ -26,7 +26,7 @@ async fn get_shorty_db_connection() -> MongoResult<Database> {
             .expect("could not find database string"),
     );
 
-    database.run_command(doc! { "ping": 1 }, None).await?;
+    database.run_command(doc! { "ping": 1 }).await?;
 
     Ok(database)
 }

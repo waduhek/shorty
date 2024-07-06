@@ -33,7 +33,7 @@ pub async fn delete_by_short_id(short_id: String) {
 
     let urls_collection = database.collection::<Document>("urls");
     urls_collection
-        .delete_many(doc! { "short_id": short_id }, None)
+        .delete_many(doc! { "short_id": short_id })
         .await
         .expect("could not empty urls collection");
 }
