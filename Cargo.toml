@@ -23,7 +23,7 @@ version = "1.0.210"
 features = ["derive"]
 
 [dependencies.bson]
-version = "2.12.0"
+version = "2.13.0"
 features = ["chrono-0_4"]
 
 [dev-dependencies]
