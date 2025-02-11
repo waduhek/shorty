@@ -15,16 +15,16 @@ pub(crate) fn generate_id(url: &str) -> String {
     url_hasher.update(url.as_bytes());
     let mut url_hash = hex::encode(url_hasher.finalize());
 
-    let mut rng_gen = rand::thread_rng();
+    let mut rng_gen = rand::rng();
 
     let short_id_start_idx: usize =
-        rng_gen.gen_range(0..(url_hash.len() - NUM_CHARS));
+        rng_gen.random_range(0..(url_hash.len() - NUM_CHARS));
     let short_id_end_idx = short_id_start_idx + NUM_CHARS;
 
     // Make random alphabets in the short ID range uppercase.
     unsafe {
         for ch in url_hash.as_bytes_mut() {
-            if rng_gen.gen_bool(0.30) && ch.is_ascii_alphabetic() {
+            if rng_gen.random_bool(0.30) && ch.is_ascii_alphabetic() {
                 ch.make_ascii_uppercase();
             }
         }
