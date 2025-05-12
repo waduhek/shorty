@@ -15,7 +15,7 @@ regex = "1.11.1"
 lazy_static = "1.5.0"
 
 [dependencies.tokio]
-version = "1.44.2"
+version = "1.45.0"
 features = ["full"]
 
 [dependencies.serde]
